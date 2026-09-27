@@ -2,7 +2,7 @@ import datetime
 import json
 import uuid
 
-from datastruct.test_data import TestQuestion
+from src.datastruct.test_data import TestQuestion
 from src.paths import SESSIONS_DIR
 
 
