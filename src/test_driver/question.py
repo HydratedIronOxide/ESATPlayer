@@ -7,6 +7,7 @@ from io import BytesIO
 
 
 from src.datastruct.test_data import TestQuestion
+from test_driver.stopwatch import Stopwatch
 
 plt.rcParams["mathtext.fontset"] = 'cm'
 TOKEN_RE = re.compile(r"\$\$(.*?)\$\$ | \$(.*?)\$", re.DOTALL)
@@ -63,26 +64,40 @@ def write_text(text: str, textbox: tk.Text, font_size: int = 16) -> list[ImageTk
 
 
 
-class QuestionView(tk.Canvas):
+class QuestionView(tk.Frame):
     def __init__(self, parent, question: TestQuestion):
         super().__init__(parent,bg='#FFF')
-        frame = tk.Frame(self,bg='#FFF')
-        scrollbar = tk.Scrollbar(self, orient='vertical', command=self.yview)
+        self._canvas = tk.Canvas(self, bg='#FFF')
+        self._canvas.pack(fill='both', expand=True)
+        frame = tk.Frame(self._canvas,bg='#FFF')
+
+        scrollbar = tk.Scrollbar(self._canvas, orient='vertical', command=self._canvas.yview)
         scrollbar.pack(side="right", fill="y")
-        self.create_window((0,0),window=frame,anchor='nw')
-        self.configure(yscrollcommand=scrollbar.set)
+        self._canvas.create_window((0,0),window=frame,anchor='nw')
+        self._canvas.configure(yscrollcommand=scrollbar.set)
 
-        frame.bind("<Configure>", lambda e: self.configure(scrollregion=self.bbox('all')))
+        self.question = question
 
-        self._question_frame = _Question(self, question.question)
-        self._choices_frame = _Choices(self, question.choices)
+        frame.bind("<Configure>", lambda e: self._canvas.configure(scrollregion=self._canvas.bbox('all')))
+
+        self._question_frame = _Question(self._canvas, question.question)
+        self._choices_frame = _Choices(self._canvas, question.choices)
 
         self._question_frame.pack(padx=10, pady=10, fill='both')
         self._choices_frame.pack(fill='both', padx=10, pady=10)
 
+        self.timer = Stopwatch()
+
+    @property
+    def choice(self): return self._choices_frame.choice
+
+    @property
+    def correct(self): return self.question.correct
+
+
 
 class _Question(tk.Frame):
-    def __init__(self, parent: 'QuestionView', q: str):
+    def __init__(self, parent: tk.Canvas, q: str):
         super().__init__(parent,bg='#FFF')
         self._q = q
         self._text = tk.Text(self, wrap='word',font=("Arial",16),relief='flat',height=5)
