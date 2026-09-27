@@ -1,5 +1,4 @@
 import tkinter as tk
-import uuid
 
 from src.qa_manager.result_generator import generate_result
 from src.datastruct.test_data import TestQuestion
@@ -11,11 +10,14 @@ from src.test_driver.stopwatch import Stopwatch
 #5B87C4
 
 class TestPlayer(tk.Toplevel):
-    def __init__(self, parent, questions: tuple[TestQuestion, ...]):
+    def __init__(self, parent, questions: tuple[TestQuestion, ...], name: str, finish_callback):
         super().__init__(parent,bg='#FFF')
         self.geometry("1280x720")
         self.title("ESAT Driver")
         # self.grab_set()
+
+        self._name = name
+        self._finish_callback = finish_callback
 
         self._length = len(questions)
 
@@ -71,6 +73,8 @@ class TestPlayer(tk.Toplevel):
         colour='#5B87C4'
         frame = tk.Frame(self,bg=colour,padx=2,pady=2)
         tk.Label(frame,textvariable=self._timer_tv,font=("Arial",16),bg=colour,fg='#FFF'
+                 ).pack(side='left',fill="both",padx=10)
+        tk.Label(frame,text=self._name,font=("Arial",16),bg=colour,fg='#FFF'
                  ).pack(side='left',fill="both",padx=10)
         frame.grid(row=1,column=0,sticky='wens')
 
@@ -130,6 +134,7 @@ class TestPlayer(tk.Toplevel):
                     "time": frame.timer.elapsed()})
         generate_result(answers)
         self.destroy()
+        self._finish_callback(answers, self._q)
 
     def __refresh_timer(self, _=None):
         current = self._timer.elapsed()
@@ -138,16 +143,9 @@ class TestPlayer(tk.Toplevel):
         self.after(50, self.__refresh_timer, None)
 
 
-if __name__ == "__main__":
-    c = tk.Tk()
-    tp = TestPlayer(c, (
-        TestQuestion(
-        "Find the initial charge of capacitor $\\int_{0}^{\\infty}{I_0 e^{\\frac{-t}{RC}}}$ as function of Q.",
-        ("$Q=I_0 CR$", "before $Q$ plaintext", "plaintext"),
-        uuid.uuid4(), "C"),
-        TestQuestion("q2 test",("q2 choice","q2 choice2"),uuid.uuid4(), "D")
-    ))
-    c.mainloop()
+
+
+
 
 
 

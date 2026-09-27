@@ -1,0 +1,32 @@
+{
+    "title": "Daily ESAT Set - 27 September 2026",
+    "questions": [
+        {
+            "id": "eb97d107-2794-45f2-b584-9520bb6df29d",
+            "subject": "m1",
+            "difficulty": "easy",
+            "question": "Given that $x^2 + y^2 = 25$, what is the greatest possible value of $3x + 4y$?",
+            "choices": [
+                "5",
+                "15",
+                "20",
+                "25"
+            ],
+            "correct_answer": "D"
+        },
+        {
+            "id": "1cebd046-b60c-4f7f-8190-256da8abc6e0",
+            "subject": "m2",
+            "difficulty": "medium",
+            "question": "The sequence is defined by\n$$u_{n+1}=2u_n+3$$\nwith $u_1=1$. Find $u_5$.",
+            "choices": [
+                "31",
+                "47",
+                "61",
+                "65",
+                "77"
+            ],
+            "correct_answer": "C"
+        }
+    ]
+}

@@ -5,18 +5,20 @@ import matplotlib.pyplot as plt
 from PIL import Image, ImageTk
 from io import BytesIO
 
-
 from src.datastruct.test_data import TestQuestion
-from test_driver.stopwatch import Stopwatch
+from src.test_driver.stopwatch import Stopwatch
 
 plt.rcParams["mathtext.fontset"] = 'cm'
-TOKEN_RE = re.compile(r"\$\$(.*?)\$\$ | \$(.*?)\$", re.DOTALL)
-
+TOKEN_RE = re.compile(
+    r"\$\$(?P<display>.*?)\$\$|(?<!\$)\$(?P<inline>.*?)\$(?!\$)",
+    re.DOTALL,
+)
 
 def tex_to_image(tex: str, font_size: int = 16) -> ImageTk.PhotoImage:
     print(tex)
     buf = BytesIO()
-    fig = plt.figure(figsize=(0.01, 0.01))
+    # fig = plt.figure(figsize=(0.01, 0.01))
+    fig = plt.figure()
     fig.patch.set_alpha(0)
     txt = fig.text(0,0,tex,fontsize=font_size)
     fig.canvas.draw()
@@ -26,7 +28,7 @@ def tex_to_image(tex: str, font_size: int = 16) -> ImageTk.PhotoImage:
     plt.savefig(buf,format="png",transparent=True,
                 bbox_inches="tight",
                 pad_inches=0.02,
-                dpi=75)
+                dpi=105)
     plt.close(fig)
     buf.seek(0)
     return ImageTk.PhotoImage(Image.open(buf))
@@ -43,14 +45,16 @@ def write_text(text: str, textbox: tk.Text, font_size: int = 16) -> list[ImageTk
             textbox.insert(tk.END, text[idx:start])
 
         # Maths in $$ ... $$
-        if m.group(1) is not None:
-            eqn = tex_to_image(f"${m.group(1).strip()}$", font_size)
+        if m.group("display") is not None:
+            textbox.insert(tk.END, '\n')
+            eqn = tex_to_image(f"${m.group('display').strip()}$", font_size)
             imgs.append(eqn)
             textbox.image_create(tk.END, image=eqn)
+            textbox.insert(tk.END, '\n')
 
         # Inline maths in $ ... $
         else:
-            eqn = tex_to_image(f"${m.group(2).strip()}$")
+            eqn = tex_to_image(f"${m.group('inline').strip()}$", font_size)
             imgs.append(eqn)
             textbox.image_create(tk.END, image=eqn)
 
@@ -71,6 +75,10 @@ class QuestionView(tk.Frame):
         self._canvas.pack(fill='both', expand=True)
         frame = tk.Frame(self._canvas,bg='#FFF')
 
+        frame.grid_rowconfigure((0,1), weight=1, uniform='z')
+        frame.grid_columnconfigure(0, weight=1, uniform='z')
+
+
         scrollbar = tk.Scrollbar(self._canvas, orient='vertical', command=self._canvas.yview)
         scrollbar.pack(side="right", fill="y")
         self._canvas.create_window((0,0),window=frame,anchor='nw')
@@ -80,24 +88,21 @@ class QuestionView(tk.Frame):
 
         frame.bind("<Configure>", lambda e: self._canvas.configure(scrollregion=self._canvas.bbox('all')))
 
-        self._question_frame = _Question(self._canvas, question.question)
-        self._choices_frame = _Choices(self._canvas, question.choices)
+        self._question_frame = _Question(frame, question.question)
+        self._choices_frame = _Choices(frame, question.choices)
 
-        self._question_frame.pack(padx=10, pady=10, fill='both')
-        self._choices_frame.pack(fill='both', padx=10, pady=10)
+        self._question_frame.grid(row=0,column=0,pady=10,sticky="news")
+        self._choices_frame.grid(row=1,column=0,pady=10,sticky="news")
 
         self.timer = Stopwatch()
 
     @property
     def choice(self): return self._choices_frame.choice
 
-    @property
-    def correct(self): return self.question.correct
-
 
 
 class _Question(tk.Frame):
-    def __init__(self, parent: tk.Canvas, q: str):
+    def __init__(self, parent: tk.Frame, q: str):
         super().__init__(parent,bg='#FFF')
         self._q = q
         self._text = tk.Text(self, wrap='word',font=("Arial",16),relief='flat',height=5)
@@ -127,7 +132,6 @@ class _Choices(tk.Frame):
 
     @property
     def choice(self): return self._var.get()
-
 
 
 

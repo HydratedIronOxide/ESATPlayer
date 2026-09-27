@@ -2,6 +2,7 @@ import datetime
 import json
 import uuid
 
+from datastruct.test_data import TestQuestion
 from src.paths import SESSIONS_DIR
 
 
@@ -36,6 +37,23 @@ def generate_result(test_data: list[dict]):
 
 
 
+def mark_set(test_data: list[dict], question_data: list[TestQuestion]):
+    """Marks the test data against the question data and returns a list of results"""
+    results = []
+    for i, q in enumerate(question_data):
+        qid = str(q.id)
+        selected = test_data[i]['selected']
+        correct = q.correct
+        time = test_data[i]['time']
+        is_correct = selected == correct
+        results.append({
+            'qid': qid,
+            'selected': selected,
+            'correct': correct,
+            'time': time,
+            'is_correct': is_correct
+        })
+    return results
 
 
 
