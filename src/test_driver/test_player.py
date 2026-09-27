@@ -1,7 +1,7 @@
 import tkinter as tk
 import uuid
 
-from qa_manager.result_generator import generate_result
+from src.qa_manager.result_generator import generate_result
 from src.datastruct.test_data import TestQuestion
 from src.test_driver.question import QuestionView
 from src.test_driver.stopwatch import Stopwatch
@@ -23,7 +23,7 @@ class TestPlayer(tk.Toplevel):
         self._q_frames: list[QuestionView] = []
 
         self._q_num = 1
-        self._q_num_tv = tk.StringVar(self, value=f"Question {self._q_num}")
+        self._q_num_tv = tk.StringVar(self, value=f"Question {self._q_num} of {self._length}")
 
         self._timer = Stopwatch()
         self._timer_tv = tk.StringVar(self, value="00:00")
@@ -34,8 +34,8 @@ class TestPlayer(tk.Toplevel):
         self.__grid_config()
 
         self.__create_title_bar()
+        self.__create_control_bar()
         self.__create_nav_bar()
-
         self.__create_pause_frame()
         self.__load_questions()
 
@@ -44,32 +44,38 @@ class TestPlayer(tk.Toplevel):
         self.__refresh_timer()
 
     def __grid_config(self):
-        self.rowconfigure((0,2),weight=1,uniform='a')
-        self.rowconfigure(1,weight=15,uniform='a')
+        self.rowconfigure((0,1,3),weight=1,uniform='a')
+        self.rowconfigure(2,weight=15,uniform='a')
         self.columnconfigure(0,weight=1,uniform='a')
 
     def __create_pause_frame(self):
         self._pause_frame = tk.Frame(self,bg='#FFF')
-        self._pause_frame.grid(row=1,column=0,sticky='wens')
-        tk.Label(self._pause_frame,text="The test is now paused",font=('Arial',24)
-                 ).place(relx=0.5,rely=0.5,anchor='center')
+        self._pause_frame.grid(row=2,column=0,sticky='wens')
+        frame = tk.Frame(self._pause_frame,bg='#FFF')
+        tk.Label(frame,text="The test is now paused",bg='#FFF',font=('Arial',24)
+                 ).pack(fill='both')
+        tk.Button(frame,text="Resume",font=("Arial",24),bg='#FFF',command=self.__pause_resume_callback
+                 ).pack()
+        frame.place(relx=0.5,rely=0.5,anchor='center')
 
     def __create_title_bar(self):
-        colour="#3F6CD0"
+        colour="#3F6CB0"
         frame = tk.Frame(self,bg=colour,padx=2,pady=2)
-        frame.columnconfigure(0,weight=5,uniform='a')
-        frame.columnconfigure(1,weight=3,uniform='a')
-        frame.columnconfigure(2,weight=1,uniform='a')
-        tk.Label(frame,text="Engineering and Science Admissions Test",font=("Arial",24),bg=colour,fg='#FFF',anchor='w'
-                 ).grid(row=0,column=0,sticky='wens')
-        tk.Label(frame,textvariable=self._timer_tv,font=("Arial",16),bg=colour,fg='#FFF'
-                 ).grid(row=0,column=1,sticky='wens')
+        tk.Label(frame,text="Engineering and Science Admissions Test",font=("Arial",20),bg=colour,fg='#FFF',anchor='w'
+                 ).pack(side="left",fill="both",padx=10)
         tk.Label(frame,textvariable=self._q_num_tv,font=("Arial",16),bg=colour,fg='#FFF'
-                 ).grid(row=0,column=2)
+                 ).pack(side="right",fill="both",padx=10)
         frame.grid(row=0,column=0,sticky='wens')
 
+    def __create_control_bar(self):
+        colour='#5B87C4'
+        frame = tk.Frame(self,bg=colour,padx=2,pady=2)
+        tk.Label(frame,textvariable=self._timer_tv,font=("Arial",16),bg=colour,fg='#FFF'
+                 ).pack(side='left',fill="both",padx=10)
+        frame.grid(row=1,column=0,sticky='wens')
+
     def __create_nav_bar(self):
-        frame = tk.Frame(self,relief='flat',bg="#3F6CD0",padx=5,pady=5)
+        frame = tk.Frame(self,relief='flat',bg="#3F6CB0",padx=5,pady=5)
         tk.Button(frame,text="Previous",command=self.__prev_q_callback,font=("Arial",16)
                   ).pack(side='left', fill='both')
         tk.Button(frame,text="Next",command=self.__next_q_callback,font=("Arial",16)
@@ -78,12 +84,12 @@ class TestPlayer(tk.Toplevel):
                   ).pack(side='left',fill='both',padx=5)
         tk.Button(frame,text="Pause/Resume",command=self.__pause_resume_callback,font=("Arial",16)
                   ).pack(side="right",fill='both',padx=5)
-        frame.grid(row=2,column=0,sticky='wens')
+        frame.grid(row=3,column=0,sticky='wens')
 
     def __load_questions(self):
         for item in self._q:
             q = QuestionView(self, item)
-            q.grid(row=1,column=0,sticky='wens')
+            q.grid(row=2,column=0,sticky='wens')
             self._q_frames.append(q)
         self._q_frames[0].tkraise()
 
@@ -105,7 +111,7 @@ class TestPlayer(tk.Toplevel):
         self._q_num += 1
         self._q_frames[self._q_num-1].tkraise()
         self._q_frames[self._q_num-1].timer.start()
-        self._q_num_tv.set(f"Question {self._q_num}")
+        self._q_num_tv.set(f"Question {self._q_num} of {self._length}")
 
     def __prev_q_callback(self):
         if self._q_num == 1 or not self._timer.running: return
@@ -113,7 +119,7 @@ class TestPlayer(tk.Toplevel):
         self._q_num -= 1
         self._q_frames[self._q_num-1].tkraise()
         self._q_frames[self._q_num-1].timer.start()
-        self._q_num_tv.set(f"Question {self._q_num}")
+        self._q_num_tv.set(f"Question {self._q_num} of {self._length}")
 
     def __finish_callback(self):
         answers = []
@@ -125,14 +131,11 @@ class TestPlayer(tk.Toplevel):
         generate_result(answers)
         self.destroy()
 
-    def __refresh_timer(self):
+    def __refresh_timer(self, _=None):
         current = self._timer.elapsed()
         text = self._timer.format_seconds(current)
         self._timer_tv.set(text)
-        self.after(50, self.__refresh_timer)
-
-
-
+        self.after(50, self.__refresh_timer, None)
 
 
 if __name__ == "__main__":

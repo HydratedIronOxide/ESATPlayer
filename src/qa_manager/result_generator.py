@@ -1,6 +1,5 @@
 import datetime
 import json
-import time
 import uuid
 
 from src.paths import SESSIONS_DIR
