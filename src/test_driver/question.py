@@ -15,10 +15,8 @@ TOKEN_RE = re.compile(
 )
 
 def tex_to_image(tex: str, font_size: int = 16) -> ImageTk.PhotoImage:
-    print(tex)
     buf = BytesIO()
-    # fig = plt.figure(figsize=(0.01, 0.01))
-    fig = plt.figure()
+    fig = plt.figure(figsize=(0.01, 0.01))
     fig.patch.set_alpha(0)
     txt = fig.text(0,0,tex,fontsize=font_size)
     fig.canvas.draw()
@@ -109,18 +107,24 @@ class _Question(tk.Frame):
         self._text.pack(fill="both", expand=True)
         self._imgs: list[ImageTk.PhotoImage] = []
 
-        dat = write_text(self._q, self._text, 16)
+        try:
+            dat = write_text(self._q, self._text, 16)
+            self._imgs += dat
+        except Exception as e:
+            print(f"Something went wrong: {e}")
         self._text.configure(state="disabled")
 
-        self._imgs += dat
 
 
 class _Choices(tk.Frame):
     def __init__(self, parent, c: tuple[str]):
-        print(c)
         super().__init__(parent,bg='#FFF')
         self._var = tk.StringVar(self, "-")
-        self._imgs = [tex_to_image(s) for s in c]
+        self._imgs = []
+        for s in c:
+            try:
+                self._imgs.append(tex_to_image(s))
+            except Exception as e: print(f"Something went wrong: {e}")
 
         self.grid_rowconfigure(list(range(len(c))), weight=1, uniform='a')
         self.grid_columnconfigure(0, weight=1, uniform='a')

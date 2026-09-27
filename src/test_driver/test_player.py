@@ -41,9 +41,8 @@ class TestPlayer(tk.Toplevel):
         self.__create_pause_frame()
         self.__load_questions()
 
-        self._pause_frame.tkraise()
-
         self.__refresh_timer()
+        self._pause_frame.tkraise()
 
     def __grid_config(self):
         self.rowconfigure((0,1,3),weight=1,uniform='a')
@@ -96,6 +95,7 @@ class TestPlayer(tk.Toplevel):
             q.grid(row=2,column=0,sticky='wens')
             self._q_frames.append(q)
         self._q_frames[0].tkraise()
+        self._pause_frame.tkraise()
 
     def __pause_resume_callback(self):
         if self._timer.running:

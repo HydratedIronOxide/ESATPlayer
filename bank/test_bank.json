@@ -1,0 +1,239 @@
+{
+    "title": "ESAT Mega Set - 27 September 2026",
+    "questions": [
+        {
+            "id": "388e2297-8419-4f22-b4ab-73cb072fe224",
+            "subject": "m1",
+            "difficulty": "easy",
+            "question": "The length of each identical rod is recorded as $2.4\\,\\mathrm{m}$, correct to the nearest $0.1\\,\\mathrm{m}$. What is the smallest number of rods guaranteed to have a combined length greater than $12\\,\\mathrm{m}$?",
+            "choices": [
+                "5",
+                "6",
+                "7",
+                "8"
+            ],
+            "correct_answer": "B"
+        },
+        {
+            "id": "c72028f0-4c69-4105-a721-5a68d6f3f765",
+            "subject": "phys",
+            "difficulty": "easy",
+            "question": "A wave enters a second medium at an angle to the normal. Its speed decreases from $v$ to $3v/4$. Which statement is correct?",
+            "choices": [
+                "Its frequency and wavelength both decrease; it bends towards the normal.",
+                "Its frequency is unchanged, its wavelength becomes $3/4$ of its original value, and it bends towards the normal.",
+                "Its frequency is unchanged, its wavelength becomes $4/3$ of its original value, and it bends away from the normal.",
+                "Its frequency decreases, its wavelength is unchanged, and it bends away from the normal."
+            ],
+            "correct_answer": "B"
+        },
+        {
+            "id": "a9dfea97-6405-4a40-bc29-43ab8ffb0986",
+            "subject": "m2",
+            "difficulty": "medium",
+            "question": "The equation\n$$x^2-kx+9=0$$\nhas two distinct positive real roots. Which condition must $k$ satisfy?",
+            "choices": [
+                "$k<-6$",
+                "$k>6$",
+                "$|k|>6$",
+                "$k\\geq 6$"
+            ],
+            "correct_answer": "B"
+        },
+        {
+            "id": "853ce297-5088-4c3b-a872-620972458fe4",
+            "subject": "phys",
+            "difficulty": "medium",
+            "question": "An $80\\,\\mathrm{W}$ heater is $75\\%$ efficient. It is used to melt $0.12\\,\\mathrm{kg}$ of a substance already at its melting temperature. The substance has specific latent heat of fusion\n$$2.0\\times10^5\\,\\mathrm{J\\,kg^{-1}}.$$\nHow long does melting take?",
+            "choices": [
+                "$300\\,\\mathrm{s}$",
+                "$400\\,\\mathrm{s}$",
+                "$500\\,\\mathrm{s}$",
+                "$600\\,\\mathrm{s}$"
+            ],
+            "correct_answer": "B"
+        },
+        {
+            "id": "6f1ec273-af98-475c-b41d-217afe4378c8",
+            "subject": "m2",
+            "difficulty": "easy",
+            "question": "A function $f$ has exactly two roots, $-2$ and $3$. What is the sum of all real solutions of\n$$f(2x-1)=0?$$",
+            "choices": [
+                "$1/2$",
+                "$1$",
+                "$3/2$",
+                "$5/2$"
+            ],
+            "correct_answer": "C"
+        },
+        {
+            "id": "735bb7a7-6594-4f57-9074-831e8ad3ff85",
+            "subject": "phys",
+            "difficulty": "medium",
+            "question": "An object accelerates uniformly from speed $u$ to $3u$ over distance $s$. It then decelerates uniformly to rest over a further distance $s$. What is\n$$\\frac{\\text{magnitude of the deceleration}}{\\text{initial acceleration}}?$$",
+            "choices": [
+                "$8/9$",
+                "$1$",
+                "$9/8$",
+                "$9/4$"
+            ],
+            "correct_answer": "C"
+        },
+        {
+            "id": "02986199-c2f3-458f-8ac7-8d4480c6961e",
+            "subject": "m1",
+            "difficulty": "medium",
+            "question": "A histogram has the following bars:\n$$\\begin{array}{c|c}\\text{Class interval}&\\text{Frequency density}\\\\ \\hline 0\\leq x<10&2\\\\10\\leq x<15&5\\\\15\\leq x<30&1\\end{array}$$\nWhat fraction of the observations satisfy $x\\geq15$?",
+            "choices": [
+                "$1/6$",
+                "$1/4$",
+                "$1/3$",
+                "$3/4$"
+            ],
+            "correct_answer": "B"
+        },
+        {
+            "id": "f31537cd-20eb-4e73-b812-25ce01a6a458",
+            "subject": "phys",
+            "difficulty": "easy",
+            "question": "A horizontal force $F$ gives an object of mass $m$ acceleration $a$ on a smooth surface. The same force is then applied to an object of mass $3m$, but a frictional force $F/4$ opposes the motion. What is the second object's acceleration?",
+            "choices": [
+                "$a/12$",
+                "$a/4$",
+                "$a/3$",
+                "$3a/4$"
+            ],
+            "correct_answer": "B"
+        },
+        {
+            "id": "e0a99a4f-7787-486c-a24f-fbdd97288182",
+            "subject": "m2",
+            "difficulty": "medium",
+            "question": "A sector has area $12\\pi\\,\\mathrm{cm^2}$ and arc length $4\\pi\\,\\mathrm{cm}$. What is its perimeter?",
+            "choices": [
+                "$6+4\\pi\\,\\mathrm{cm}$",
+                "$12+2\\pi\\,\\mathrm{cm}$",
+                "$12+4\\pi\\,\\mathrm{cm}$",
+                "$24+4\\pi\\,\\mathrm{cm}$"
+            ],
+            "correct_answer": "C"
+        },
+        {
+            "id": "8361d19c-2ed2-4e45-a8c0-7cac244f3f07",
+            "subject": "phys",
+            "difficulty": "medium",
+            "question": "An ultrasound pulse has frequency $2.0\\,\\mathrm{MHz}$. It returns to its source $40\\,\\mathrm{\\mu s}$ after being emitted. How many wavelengths fit into the pulse's total out-and-back path?",
+            "choices": [
+                "40",
+                "80",
+                "100",
+                "160"
+            ],
+            "correct_answer": "B"
+        },
+        {
+            "id": "dc794cab-2c12-4e21-8ebe-bade742a433b",
+            "subject": "m2",
+            "difficulty": "easy",
+            "question": "In an arithmetic sequence,\n$$u_4+u_{10}=30.$$\nWhat is the sum of the first $13$ terms?",
+            "choices": [
+                "$180$",
+                "$195$",
+                "$210$",
+                "It cannot be determined"
+            ],
+            "correct_answer": "B"
+        },
+        {
+            "id": "0d3d2cd4-5773-46b0-8209-2698d9728b82",
+            "subject": "phys",
+            "difficulty": "easy",
+            "question": "A nuclide is represented by ${}^{A}_{Z}X$. It emits one alpha particle followed by two beta-minus particles. What are the mass number and atomic number of the final nuclide?",
+            "choices": [
+                "Mass number $A-4$, atomic number $Z-4$",
+                "Mass number $A-4$, atomic number $Z-2$",
+                "Mass number $A-4$, atomic number $Z$",
+                "Mass number $A$, atomic number $Z$"
+            ],
+            "correct_answer": "C"
+        },
+        {
+            "id": "0f6be1fb-e4a1-4a0c-a55f-eb2fc1573eef",
+            "subject": "m2",
+            "difficulty": "hard",
+            "question": "The sum of the first $12$ terms of an arithmetic sequence is $30$. The sum of the next $12$ terms is $-6$. What is the sum of the first $60$ terms?",
+            "choices": [
+                "$-240$",
+                "$-210$",
+                "$-180$",
+                "$210$"
+            ],
+            "correct_answer": "B"
+        },
+        {
+            "id": "34f18b01-a0ba-42e8-8d3e-38eeef28bda6",
+            "subject": "phys",
+            "difficulty": "hard",
+            "question": "A small object of mass $m$, travelling at speed $v$, collides directly with a stationary block of mass $3m$ and becomes embedded in it. The combined object subsequently climbs a smooth ramp. What maximum vertical height does it reach?",
+            "choices": [
+                "$v^2/(8g)$",
+                "$v^2/(16g)$",
+                "$v^2/(32g)$",
+                "$v^2/(64g)$"
+            ],
+            "correct_answer": "C"
+        },
+        {
+            "id": "40fff762-5324-4f11-901a-96bc73c8c027",
+            "subject": "m2",
+            "difficulty": "hard",
+            "question": "For every non-zero real $x$, a function $f$ satisfies\n$$f(x)+2f\\left(\\frac1x\\right)=5x+\\frac1x.$$\nWhat is $f(2)$?",
+            "choices": [
+                "$-1/2$",
+                "$1/2$",
+                "$9/2$",
+                "$21/2$"
+            ],
+            "correct_answer": "A"
+        },
+        {
+            "id": "99788f15-512d-4a1f-b646-0a88e398d323",
+            "subject": "m1",
+            "difficulty": "hard",
+            "question": "From the origin $O$, two non-parallel position vectors locate points $A$ and $B$. Point $P$ lies on $OA$ and point $Q$ lies on $OB$, with\n$$OP:PA=2:1,\\qquad OQ:QB=1:2.$$\nThe lines $PQ$ and $AB$ meet at $R$. What is $AR:RB$?",
+            "choices": [
+                "$1:2$",
+                "$1:3$",
+                "$1:4$",
+                "$2:3$"
+            ],
+            "correct_answer": "C"
+        },
+        {
+            "id": "062cd2f3-fb62-4cfb-8d74-ffec056c73d6",
+            "subject": "m2",
+            "difficulty": "hard",
+            "question": "For a non-zero real constant $a$, the graph\n$$y=x^2+ax$$\nand the $x$-axis enclose a region of area $9/2$. What is $|a|$?",
+            "choices": [
+                "$2$",
+                "$3$",
+                "$4$",
+                "$6$"
+            ],
+            "correct_answer": "B"
+        },
+        {
+            "id": "c2cd900b-3a9e-4343-acd9-0e3d7b61cab3",
+            "subject": "phys",
+            "difficulty": "hard",
+            "question": "A small mass $m$ rests on top of a vertical spring but is not attached to it. The spring, of stiffness $k$, is initially compressed by distance $x$, and the mass is released from rest. There are no energy losses, and\n$$kx=3mg.$$\nWhat is the mass's maximum height above its initial position?",
+            "choices": [
+                "$x/2$",
+                "$x$",
+                "$3x/2$",
+                "$2x$"
+            ],
+            "correct_answer": "C"
+        }
+    ]
+}
